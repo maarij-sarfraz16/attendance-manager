@@ -1,0 +1,147 @@
+{
+ "actions": [],
+ "autoname": "format:ATD-{#####}",
+ "creation": "2026-10-24 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "attendance",
+  "employee",
+  "employee_name",
+  "department",
+  "column_break_1",
+  "attendance_date",
+  "shift",
+  "requested_by",
+  "section_times",
+  "original_in_time",
+  "original_out_time",
+  "column_break_2",
+  "in_time",
+  "out_time"
+ ],
+ "fields": [
+  {
+   "fieldname": "attendance",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Attendance",
+   "ignore_user_permissions": 1,
+   "options": "Attendance",
+   "reqd": 1,
+   "set_only_once": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fetch_from": "attendance.employee",
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "ignore_user_permissions": 1,
+   "options": "Employee",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "attendance.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "attendance.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "ignore_user_permissions": 1,
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "attendance.attendance_date",
+   "fieldname": "attendance_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Attendance Date",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "attendance.shift",
+   "fieldname": "shift",
+   "fieldtype": "Link",
+   "label": "Shift",
+   "ignore_user_permissions": 1,
+   "options": "Shift Type",
+   "read_only": 1
+  },
+  {
+   "default": "__user",
+   "fieldname": "requested_by",
+   "fieldtype": "Link",
+   "label": "Requested By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_times",
+   "fieldtype": "Section Break",
+   "label": "Times"
+  },
+  {
+   "fieldname": "original_in_time",
+   "fieldtype": "Datetime",
+   "label": "Current In Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "original_out_time",
+   "fieldtype": "Datetime",
+   "label": "Current Out Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "in_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "New In Time"
+  },
+  {
+   "fieldname": "out_time",
+   "fieldtype": "Datetime",
+   "in_list_view": 1,
+   "label": "New Out Time"
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-10-24 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Attendnace Manager",
+ "name": "Attendance Draft",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {"read": 1, "report": 1, "export": 1, "role": "All"},
+  {"create": 1, "write": 1, "delete": 1, "read": 1, "role": "Employee"},
+  {"create": 1, "write": 1, "delete": 1, "read": 1, "submit": 1, "cancel": 1, "report": 1, "role": "HR Manager"},
+  {"create": 1, "write": 1, "delete": 1, "read": 1, "submit": 1, "cancel": 1, "report": 1, "role": "HR User"},
+  {"create": 1, "write": 1, "delete": 1, "read": 1, "submit": 1, "cancel": 1, "report": 1, "role": "System Manager"}
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "employee_name"
+}

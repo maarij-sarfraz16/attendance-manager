@@ -7,9 +7,9 @@
  "modified": "2026-10-23 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "Attendnace Manager",
- "name": "team_attendance",
+ "name": "attendance_manager",
  "owner": "Administrator",
- "page_name": "team_attendance",
+ "page_name": "attendance_manager",
  "roles": [
   {
    "role": "Employee"
@@ -25,5 +25,5 @@
  "standard": "Yes",
  "style": null,
  "system_page": 0,
- "title": "Team Attendance"
+ "title": "Attendance Manager"
 }
