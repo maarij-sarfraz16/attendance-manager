@@ -131,6 +131,9 @@ has_permission = {
 	"Attendance Draft": "attendnace_manager.attendnace_manager.doctype.attendance_draft.attendance_draft.has_permission",
 }
 
+# Indexes the Attendance Manager page needs on large tables (Employee Checkin etc.).
+after_migrate = ["attendnace_manager.attendnace_manager.doctype.attendance_draft.attendance_draft.ensure_indexes"]
+
 # DocType Class
 # ---------------
 # Override standard doctype classes

@@ -14,11 +14,26 @@
   "shift",
   "requested_by",
   "section_times",
+  "machine_in_time",
+  "machine_out_time",
   "original_in_time",
   "original_out_time",
   "column_break_2",
   "in_time",
-  "out_time"
+  "out_time",
+  "status",
+  "section_result",
+  "original_status",
+  "original_working_hours",
+  "original_duty_hours",
+  "original_overtime",
+  "original_less_duty_hour",
+  "column_break_3",
+  "new_status",
+  "working_hours",
+  "duty_hours",
+  "overtime",
+  "less_duty_hour"
  ],
  "fields": [
   {
@@ -96,6 +111,20 @@
    "label": "Times"
   },
   {
+   "description": "First IN punch on the biometric machine",
+   "fieldname": "machine_in_time",
+   "fieldtype": "Datetime",
+   "label": "Machine In Time",
+   "read_only": 1
+  },
+  {
+   "description": "Last OUT punch on the biometric machine",
+   "fieldname": "machine_out_time",
+   "fieldtype": "Datetime",
+   "label": "Machine Out Time",
+   "read_only": 1
+  },
+  {
    "fieldname": "original_in_time",
    "fieldtype": "Datetime",
    "label": "Current In Time",
@@ -122,23 +151,132 @@
    "fieldtype": "Datetime",
    "in_list_view": 1,
    "label": "New Out Time"
+  },
+  {
+   "description": "Leave empty to work the status out from the times: both IN and OUT make it Present, otherwise Absent.",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Set Status",
+   "options": "\nPresent\nAbsent\nHalf Day\nOn Leave\nWork From Home"
+  },
+  {
+   "fieldname": "section_result",
+   "fieldtype": "Section Break",
+   "label": "Status and Hours",
+   "description": "Calculated from the new times with the same rules as the Attendance. Duty hours are the length of the shift (8 without a shift); time worked beyond it is overtime."
+  },
+  {
+   "fieldname": "original_status",
+   "fieldtype": "Data",
+   "label": "Current Status",
+   "read_only": 1
+  },
+  {
+   "fieldname": "original_working_hours",
+   "fieldtype": "Float",
+   "label": "Current Working Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "original_duty_hours",
+   "fieldtype": "Float",
+   "label": "Current Duty Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "original_overtime",
+   "fieldtype": "Float",
+   "label": "Current Overtime",
+   "read_only": 1
+  },
+  {
+   "fieldname": "original_less_duty_hour",
+   "fieldtype": "Float",
+   "label": "Current Less Duty Hour",
+   "read_only": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "new_status",
+   "fieldtype": "Data",
+   "label": "New Status",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "working_hours",
+   "fieldtype": "Float",
+   "label": "Working Hours",
+   "read_only": 1
+  },
+  {
+   "fieldname": "duty_hours",
+   "fieldtype": "Float",
+   "label": "Duty Hours",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "overtime",
+   "fieldtype": "Float",
+   "label": "Overtime",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "less_duty_hour",
+   "fieldtype": "Float",
+   "label": "Less Duty Hour",
+   "read_only": 1,
+   "hidden": 1
   }
  ],
  "index_web_pages_for_search": 0,
  "is_submittable": 1,
  "links": [],
- "modified": "2026-10-24 10:00:00.000000",
+ "modified": "2026-10-29 15:00:00.000000",
  "modified_by": "Administrator",
  "module": "Attendnace Manager",
  "name": "Attendance Draft",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [
-  {"read": 1, "report": 1, "export": 1, "role": "All"},
-  {"create": 1, "write": 1, "delete": 1, "read": 1, "role": "Employee"},
-  {"create": 1, "write": 1, "delete": 1, "read": 1, "submit": 1, "cancel": 1, "report": 1, "role": "HR Manager"},
-  {"create": 1, "write": 1, "delete": 1, "read": 1, "submit": 1, "cancel": 1, "report": 1, "role": "HR User"},
-  {"create": 1, "write": 1, "delete": 1, "read": 1, "submit": 1, "cancel": 1, "report": 1, "role": "System Manager"}
+  {
+   "read": 1,
+   "report": 1,
+   "export": 1,
+   "role": "All"
+  },
+  {
+   "create": 1,
+   "write": 1,
+   "delete": 1,
+   "read": 1,
+   "cancel": 1,
+   "role": "Employee"
+  },
+  {
+   "read": 1,
+   "submit": 1,
+   "cancel": 1,
+   "report": 1,
+   "export": 1,
+   "role": "Attendance User"
+  },
+  {
+   "create": 1,
+   "write": 1,
+   "delete": 1,
+   "read": 1,
+   "submit": 1,
+   "cancel": 1,
+   "report": 1,
+   "role": "System Manager"
+  }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
