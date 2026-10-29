@@ -206,7 +206,7 @@ VERIFIER_ROLES = {"Attendance User"}
 
 
 def _is_verifier(user):
-	# Administrator holds every role but does not verify; see `has_permission`.
+	# Administrator is handled separately; see `has_permission`.
 	return user != "Administrator" and bool(VERIFIER_ROLES & set(frappe.get_roles(user)))
 
 
@@ -260,8 +260,8 @@ def _doc_employee(doc):
 def has_permission(doc, ptype=None, user=None):
 	user = user or frappe.session.user
 	if user == "Administrator":
-		# Full rights over every draft except submitting it, which is left to an Attendance User.
-		return ptype != "submit"
+		# Full rights over every draft, submit included.
+		return True
 	is_verifier = _is_verifier(user)
 	emp = _doc_employee(doc)
 	me = _employee_of(user)
@@ -274,8 +274,8 @@ def has_permission(doc, ptype=None, user=None):
 		# Only the direct manager creates, edits or deletes.
 		return is_manager
 	if ptype == "submit":
-		# Maker-checker: an Attendance User verifies, never the manager who made the draft.
-		return is_verifier and not is_manager
+		# Any Attendance User verifies, including one who manages the employee.
+		return is_verifier
 	# read, select, report, export, print, email, share, cancel, ...
 	return is_verifier or is_manager
 

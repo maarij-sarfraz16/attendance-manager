@@ -71,7 +71,13 @@ frappe.pages["attendance_manager"].on_page_load = function (wrapper) {
 
 	page.set_primary_action(__("Load"), () => load(true));
 	page.add_inner_button(__("Save as Draft"), save);
-		page.add_inner_button(__("View Drafts"), () => frappe.set_route("List", "Attendance Draft"));
+	// Opens the full list: filters left over from an earlier visit would otherwise hide drafts.
+	page.add_inner_button(__("View Drafts"), async () => {
+		await frappe.model.user_settings.save("Attendance Draft", "List", { filters: [] });
+		await frappe.set_route("List", "Attendance Draft");
+		// A list view kept open from before still holds its own filters.
+		if (cur_list?.doctype === "Attendance Draft") cur_list.filter_area?.clear();
+	});
 
 	const $body = $('<div class="attendance-manager mt-3"></div>').appendTo(page.body);
 	let rows = [];
@@ -297,7 +303,7 @@ frappe.pages["attendance_manager"].on_page_load = function (wrapper) {
 			.join("");
 
 		const hint = canEdit
-			? __("Changes are saved as drafts and only reach the Attendance once an Attendance User verifies and submits the draft. You can review, delete or cancel your drafts but not submit them. IN and OUT times can only be set between Machine In and Machine Out, whatever the shift. If there is no Machine Out, an OUT time can be added anywhere in the 24 hours after Machine In. A day with only an IN time is Absent; adding the OUT time makes it Present and works out duty hours and overtime. Status can also be picked by hand. Times on rows with no machine punch at all cannot be edited.")
+			? __("Changes are saved as drafts and only reach the Attendance once an Attendance User verifies and submits the draft. You can review, delete or cancel your drafts; if you are an Attendance User you can also submit them.IN and OUT times can only be set between Machine In and Machine Out, whatever the shift. If there is no Machine Out, an OUT time can be added anywhere in the 24 hours after Machine In. A day with only an IN time is Absent; adding the OUT time makes it Present and works out duty hours and overtime. Status can also be picked by hand. Times on rows with no machine punch at all cannot be edited.")
 			: __("View only.");
 
 		$body.html(`
